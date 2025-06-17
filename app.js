@@ -1,7 +1,13 @@
+
 // Mise en place code express API
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = 3000;
+
+app.use(express.json());
+
+const usersRoutes = require('./routes/users');
+app.use('/users', usersRoutes);
 
 const users = [
   { id: 1, name: "Rimk" },
@@ -13,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
-app.get("/users", (req, res) => {
+app.get("/userList", (req, res) => {
   res.json(users);
 });
 
@@ -24,4 +30,5 @@ app.use((req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+
 });
