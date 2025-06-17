@@ -1,3 +1,5 @@
+
+// Mise en place code express API
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -7,10 +9,26 @@ app.use(express.json());
 const usersRoutes = require('./routes/users');
 app.use('/users', usersRoutes);
 
-app.get('/', (req, res) => {
-    res.send("siuuuu");
+const users = [
+  { id: 1, name: "Rimk" },
+  { id: 2, name: "Jouli" },
+  { id: 3, name: "Imen" },
+];
+
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
+app.get("/userList", (req, res) => {
+  res.json(users);
+});
+
+// On gère la gestion d'erreur lorsque la route n'existe pas
+app.use((req, res) => {
+  res.status(404).send("Cette page n'existe pas ");
 });
 
 app.listen(port, () => {
-    console.log(`le serveur est lance sur le port ${port}`);
+  console.log(`Server is running on port ${port}`);
+
 });
