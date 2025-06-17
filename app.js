@@ -17,6 +17,11 @@ app.get("/users", (req, res) => {
   res.json(users);
 });
 
+// On gère la gestion d'erreur lorsque la route n'existe pas
+app.use((req, res) => {
+  res.status(404).send("Cette page n'existe pas ");
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
